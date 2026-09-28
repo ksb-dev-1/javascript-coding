@@ -62,16 +62,12 @@ function groupAnagrams(strs) {
     for (let char of word) {
       freq[char.charCodeAt(0) - 97]++;
     }
-    console.log(freq);
     const key = freq.join("#");
-    console.log(key);
 
     if (!map.has(key)) {
       map.set(key, []);
     }
-    console.log(map);
     map.get(key).push(word);
-    console.log(map);
   }
   return [...map.values()];
 }
