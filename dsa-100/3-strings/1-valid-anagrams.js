@@ -100,3 +100,34 @@ const s = "rat";
 const t = "car";
 
 console.log(isAnagram(s, t));
+
+/*
+
+NOTE:
+
+Unicode:
+    use for...of
+
+    function isAnagram(s, t) {
+      if (s.length !== t.length) return false;
+
+      const map = new Map();
+
+      // Count characters from s
+      for (const char of s) {
+        map.set(char, (map.get(char) || 0) + 1);
+      }
+
+      // Subtract characters from t
+      for (const char of t) {
+        if (!map.has(char)) return false;
+
+        map.set(char, map.get(char) - 1);
+
+        if (map.get(char) < 0) return false;
+      }
+
+      return true;
+    }
+
+*/
