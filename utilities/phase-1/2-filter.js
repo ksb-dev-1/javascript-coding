@@ -1,5 +1,7 @@
 /*
 
+array.filter(function(currentValue, index, arr), thisValue)
+
 - creates a new array from calling a function for every array element.
 - does not execute the function for empty elements.
 - does not change the original array.
