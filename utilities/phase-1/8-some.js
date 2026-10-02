@@ -2,7 +2,7 @@
 
 Syntax
 -------
-array.some(function(currentValue, index, arr), thisValue)
+array.some(function(currentValue, index, arr), thisArg)
 
 Parameters
 -----------

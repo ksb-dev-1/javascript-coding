@@ -2,7 +2,7 @@
 
 Syntax
 -------
-array.find(function(currentValue, index, arr), thisValue)
+array.find(function(currentValue, index, arr), thisArg)
 
 Parameters
 -----------

@@ -2,7 +2,7 @@
 
 Syntax
 -------
-array.map(function(currentValue, index, arr), thisValue)
+array.map(function(currentValue, index, arr), thisArg)
 
 Parameters
 -----------

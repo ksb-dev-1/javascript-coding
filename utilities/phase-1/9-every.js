@@ -1,0 +1,62 @@
+/*
+
+Syntax
+-------
+array.every(function(currentValue, index, arr), thisArg)
+
+Parameters
+-----------
+function()   -	Required.
+                A function to run for each array element.
+currentValue -	Required.
+                The value of the current element.
+index	       -  Optional.
+                The index of the current element.
+arr	         -  Optional.
+                The array of the current element.
+thisValue	   -  Optional.
+                Default undefined.
+                A value passed to the function as its this value.
+
+Return Value
+-------------
+true if all elements pass the test, otherwise false.
+
+- executes a function for each array element.
+- returns true if the function returns true for all elements.
+- returns false if the function returns false for one element.
+- does not execute the function for empty elements.
+- does not change the original array
+
+*/
+
+Array.prototype.myEvery = function (callbackFn, thisArg) {
+  if (this == null) {
+    throw new TypeError(
+      "Array.prototype.myEvery can not be called on null or undefined",
+    );
+  }
+
+  if (typeof callbackFn !== "function") {
+    throw new TypeError(`${callbackFn} is not a function`);
+  }
+
+  const length = this.length;
+
+  for (let i = 0; i < length; i++) {
+    if (!(i in this)) continue;
+
+    if (!callbackFn.call(thisArg, this[i], i, this)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const nums = [1, 2, 3, 4, 5];
+
+const result = nums.myEvery((num) => {
+  return num < 6;
+});
+
+console.log(result);

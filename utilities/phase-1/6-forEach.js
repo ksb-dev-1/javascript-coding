@@ -2,7 +2,7 @@
 
 Syntax
 -------
-array.forEach(function(currentValue, index, arr), thisValue)
+array.forEach(function(currentValue, index, arr), thisArg)
 
 Parameters
 -----------

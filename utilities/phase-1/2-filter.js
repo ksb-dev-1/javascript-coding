@@ -2,7 +2,7 @@
 
 Syntax
 -------
-array.filter(function(currentValue, index, arr), thisValue)
+array.filter(function(currentValue, index, arr), thisArg)
 
 Parameters
 -----------
