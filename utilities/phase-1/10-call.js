@@ -1,5 +1,7 @@
 /*
 
+call() is a JavaScript function method used to invoke a function immediately while explicitly setting the value of this. It also allows passing arguments one by one.
+
 - calls a function with a given this value.
 - lets objects borrow methods from other objects.
 

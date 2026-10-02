@@ -1,5 +1,7 @@
 /*
 
+apply() is a JavaScript function method used to invoke a function immediately while explicitly setting the value of this. Arguments are passed as an array (or array-like object).
+
 - calls a function with a given this value.
 - lets objects borrow methods from other objects.
 
