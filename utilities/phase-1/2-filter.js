@@ -1,12 +1,30 @@
 /*
 
+Syntax
+-------
 array.filter(function(currentValue, index, arr), thisValue)
+
+Parameters
+-----------
+function()   -	Required.
+                A function to be run for each array element.
+currentValue -	Required.
+                The value of the current element.
+index	       -  Optional.
+                The index of the current element.
+arr	         -  Optional.
+                The array of the current element.
+thisArg	     -  Optional.
+                Default value undefined.
+                A value passed to the function to be used as its this value.
+
+Return Value
+-------------
+An array of elements that pass the test. An empty array if no elements pass the test.
 
 - creates a new array from calling a function for every array element.
 - does not execute the function for empty elements.
 - does not change the original array.
-
-Same as map()
 
 */
 

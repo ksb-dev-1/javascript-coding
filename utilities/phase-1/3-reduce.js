@@ -1,6 +1,28 @@
 /*
 
+Syntax
+-------
 array.reduce(function(accumulator, currentValue, currentIndex, arr), initialValue)
+
+Parameters
+-----------
+function()   -	Required.
+                A function to be run for each array element.
+
+total	       -  Required.
+                The initialValue, or the previously returned value of the function.
+currentValue -	Required.
+                The value of the current element.
+currentIndex -	Optional.
+                The index of the current element.
+arr	         -  Optional.
+                The array the current element belongs to.
+initialValue -	Optional.
+                A value to be passed to the function as the initial value.
+
+Return Value
+-------------
+The accumulated result from the last call of the callback function.
 
 - executes a reducer function for array element.
 - returns a single value: the function's accumulated result.

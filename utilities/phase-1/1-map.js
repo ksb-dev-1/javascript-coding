@@ -1,6 +1,26 @@
 /*
 
+Syntax
+-------
 array.map(function(currentValue, index, arr), thisValue)
+
+Parameters
+-----------
+function()   -	Required.
+                A function to be run for each array element.
+currentValue -	Required.
+                The value of the current element.
+index	       -  Optional.
+                The index of the current element.
+arr	         -  Optional.
+                The array of the current element.
+thisArg	     -  Optional.
+                Default value undefined.
+                A value passed to the function to be used as its this value.
+
+Return Value
+-------------
+An array - The results of a function for each array element.
 
 - creates a new array from calling a function for every array element.
 - does not execute the function for empty elements.

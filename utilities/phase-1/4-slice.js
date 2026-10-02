@@ -1,5 +1,22 @@
 /*
 
+Syntax
+-------
+array.slice(start, end)
+
+Parameters
+-----------
+start -	 Optional.
+         Start position. Default is 0.
+         Negative numbers select from the end of the array.
+end	  -  Optional.
+         End position. Default is last element.
+         Negative numbers select from the end of the array.
+
+Return Value
+-------------
+A new array containing the selected elements.
+
 - returns selected elements in a new array.
 - selects from a given start, up to a (not inclusive) given end.
 - does not change the original array.
