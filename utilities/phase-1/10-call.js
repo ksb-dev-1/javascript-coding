@@ -24,17 +24,20 @@ Value	The result of the function.
 
 Function.prototype.myCall = function (context, ...args) {
   if (typeof this !== "function") {
-    throw new TypeError(this + " is not a function");
+    throw new TypeError(`${this} is not a function`);
   }
 
-  context = context === null ? globalThis : Object(this);
-  let uniqueKey = Symbol("fn");
-  context[uniqueKey] = this;
+  const targetContext =
+    context === null || context === undefined ? globalThis : Object(context);
+
+  const uniqueKey = Symbol("fn");
+
+  targetContext[uniqueKey] = this;
 
   try {
-    return context[uniqueKey](...args);
+    return targetContext[uniqueKey](...args);
   } finally {
-    delete context[uniqueKey];
+    delete targetContext[uniqueKey];
   }
 };
 
@@ -166,12 +169,10 @@ console.log(detached.myCall({ value: 100 })); // 100
 
 /* // Example: 12 - error when not function
 
-Function.prototype.myCall.call = "not a function";
-
 try {
-  Function.prototype.myCall.call();
-} catch (e) {
-  console.log(e.message);
+  Function.prototype.myCall.call({}, {});
+} catch (error) {
+  console.log(error.message);
 }
 // TypeError: ... is not a function
 
