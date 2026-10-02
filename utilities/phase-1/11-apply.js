@@ -40,21 +40,20 @@ Value	The result of the function.
 
 Function.prototype.myApply = function (context, args) {
   if (typeof this !== "function") {
-    throw new TypeError(`${this} is not a function`);
+    throw new TypeError(this + " is not a function");
   }
 
   context = context == null ? globalThis : Object(context);
-
-  if (args != null && typeof args !== "object" && typeof args !== "function") {
-    throw new TypeError("CreateListFromArrayLike called on non-object");
-  }
-
-  const uniqueKey = Symbol("fn");
-  context[uniqueKey] = this;
+  const fnKey = Symbol("fn");
+  context[fnKey] = this;
 
   try {
     if (args == null) {
-      return context[uniqueKey]();
+      return context[fnKey]();
+    }
+
+    if (typeof args !== "object" && typeof args !== "function") {
+      throw new TypeError("CreateListFromArrayLike called on non-object");
     }
 
     const length = Number(args.length) || 0;
@@ -63,8 +62,9 @@ Function.prototype.myApply = function (context, args) {
     for (let i = 0; i < length; i++) {
       finalArgs.push(args[i]);
     }
-    return context[uniqueKey](...finalArgs);
+
+    return context[fnKey](...finalArgs);
   } finally {
-    delete context[uniqueKey];
+    delete context[fnKey];
   }
 };
