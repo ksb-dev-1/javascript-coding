@@ -71,4 +71,4 @@ const nums = [1, 2, 3, 4, 5];
 
 const result = nums.myReduce((acc, num) => acc + num, 0);
 
-console.log(result);
+console.log(result); // 15
