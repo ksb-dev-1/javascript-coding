@@ -1,0 +1,70 @@
+/*
+
+- calls a function with a given this value.
+- lets objects borrow methods from other objects.
+
+Syntax
+-------
+function.apply(context, ...args)
+
+Parameters
+----------
+function	-  Required.
+             The function to call.
+object	  -  Required.
+             The object to call with the function.
+arguments	-  Optional.
+             Array-like object with function arguments.
+
+Return Value
+-------------
+Value	The result of the function.
+
+*/
+
+// Function.prototype.myApply = function (context, args = []) {
+//   if (typeof this !== "function") {
+//     throw new TypeError(`${this} is not a function`);
+//   }
+
+//   context = context == null ? globalThis : Object(context);
+//   const uniqueKey = Symbol("fn");
+//   context[uniqueKey] = this;
+
+//   try {
+//     return context[uniqueKey](...args);
+//   } finally {
+//     delete context[uniqueKey];
+//   }
+// };
+
+Function.prototype.myApply = function (context, args) {
+  if (typeof this !== "function") {
+    throw new TypeError(`${this} is not a function`);
+  }
+
+  context = context == null ? globalThis : Object(context);
+
+  if (args != null && typeof args !== "object" && typeof args !== "function") {
+    throw new TypeError("CreateListFromArrayLike called on non-object");
+  }
+
+  const uniqueKey = Symbol("fn");
+  context[uniqueKey] = this;
+
+  try {
+    if (args == null) {
+      return context[uniqueKey]();
+    }
+
+    const length = Number(args.length) || 0;
+    const finalArgs = [];
+
+    for (let i = 0; i < length; i++) {
+      finalArgs.push(args[i]);
+    }
+    return context[uniqueKey](...finalArgs);
+  } finally {
+    delete context[uniqueKey];
+  }
+};

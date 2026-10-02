@@ -27,17 +27,14 @@ Function.prototype.myCall = function (context, ...args) {
     throw new TypeError(`${this} is not a function`);
   }
 
-  const targetContext =
-    context === null || context === undefined ? globalThis : Object(context);
-
+  context == null ? globalThis : Object(context);
   const uniqueKey = Symbol("fn");
-
-  targetContext[uniqueKey] = this;
+  context[uniqueKey] = this;
 
   try {
-    return targetContext[uniqueKey](...args);
+    return context[uniqueKey](...args);
   } finally {
-    delete targetContext[uniqueKey];
+    delete context[uniqueKey];
   }
 };
 
