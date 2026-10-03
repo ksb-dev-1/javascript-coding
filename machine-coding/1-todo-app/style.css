@@ -1,0 +1,17 @@
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    border: 1px solid #ccc;
+    max-width: 750px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.title {
+    color: blue;
+    text-align: center;
+}
