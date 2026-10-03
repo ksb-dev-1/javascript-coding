@@ -92,7 +92,5 @@ Person.prototype.sayHi = function () {
 };
 
 const BoundPerson = Person.myBind({});
-
 const p = new BoundPerson("Kedar");
-
 p.sayHi(); // should work
