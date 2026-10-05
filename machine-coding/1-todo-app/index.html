@@ -3,34 +3,42 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        <title>Todo App</title>
+        <title>Todo App Practice</title>
     </head>
     <body>
-        <div id="main">
-            <div id="container">
-                <h3 id="title">Todo App</h3>
-                <form id="add-todo-form">
+        <main>
+            <section>
+                <form id="todo-input-form">
                     <input
-                        id="input"
+                        id="todo-input"
                         type="text"
-                        placeholder="Enter todo title to add"
+                        placeholder="Enter todo you want to add"
+                    />
+                    <button id="todo-add-button">Add</button>
+                </form>
+                <form id="search-input-form">
+                    <input
+                        id="search-input"
+                        type="text"
+                        placeholder="Search todo"
                         required
                     />
-                    <button>Add</button>
+                    <button id="search-todo-button">Search</button>
                 </form>
-                <form id="search-todo-form">
-                    <input
-                        id="input"
-                        type="text"
-                        placeholder="Enter todo title to search"
-                        required
-                    />
-                    <button>Search</button>
-                </form>
-                <ul id="todo-list"></>
-            </div>
-        </div>
+                <div>
+                    <button id="all-button">All</button>
+                    <button id="todo-button">Todo</button>
+                    <button id="completed-button">Completed</button>
+                </div>
+                <ul id="todo-list"></ul>
+                <button id="mark-all-done-button" style="display: none">
+                    Mark all done
+                </button>
+                <button id="clear-all-button" style="display: none">
+                    Clear All
+                </button>
+            </section>
+        </main>
         <script src="script.js"></script>
     </body>
 </html>
