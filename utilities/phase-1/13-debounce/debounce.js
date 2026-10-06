@@ -226,14 +226,11 @@ function debounce(callbackFn, delay = 1000, options = {}) {
     }
 
     clearTimeout(timeoutId);
-
     callbackFn.call(lastContext, ...lastArgs);
-
     reset();
 
     return true;
   };
-
   return debounced;
 }
 
