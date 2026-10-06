@@ -106,6 +106,8 @@ function debounce(callbackFn, delay = 1000) {
 
 */
 
+/*
+
 function debounceLeading(callbackFn, delay = 1000) {
   let timeoutId = null;
 
@@ -124,11 +126,46 @@ function debounceLeading(callbackFn, delay = 1000) {
   };
 }
 
+*/
+
+function debounceLeadingTrailing(callbackFn, delay = 1000) {
+  let timeoutId = null;
+  let lastArgs = null;
+  let lastContext = null;
+  let hasNewCallAfterLeading = false;
+
+  return function (...args) {
+    const isFirstCall = timeoutId === null;
+
+    lastArgs = args;
+    lastContext = this;
+
+    if (isFirstCall) {
+      callbackFn.call(lastContext, ...lastArgs);
+    } else {
+      hasNewCallAfterLeading = true;
+    }
+
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      if (hasNewCallAfterLeading) {
+        callbackFn.call(lastContext, ...lastArgs);
+      }
+
+      timeoutId = null;
+      lastArgs = null;
+      lastContext = null;
+      hasNewCallAfterLeading = false;
+    }, delay);
+  };
+}
+
 function callApi(event) {
   console.log(event.target.value);
 }
 
-const debounced = debounceLeading(callApi, 5000);
+const debounced = debounceLeadingTrailing(callApi, 500);
 
 input.addEventListener("input", debounced);
 
