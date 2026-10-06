@@ -128,6 +128,8 @@ function debounceLeading(callbackFn, delay = 1000) {
 
 */
 
+/*
+
 function debounceLeadingTrailing(callbackFn, delay = 1000) {
   let timeoutId = null;
   let lastArgs = null;
@@ -161,11 +163,85 @@ function debounceLeadingTrailing(callbackFn, delay = 1000) {
   };
 }
 
+*/
+
+function debounce(callbackFn, delay = 1000, options = {}) {
+  const { leading = false, trailing = true } = options;
+
+  let timeoutId = null;
+  let lastArgs = null;
+  let lastContext = null;
+  let hasPendingTrailingCall = false;
+
+  function reset() {
+    timeoutId = null;
+    lastArgs = null;
+    lastContext = null;
+    hasPendingTrailingCall = false;
+  }
+
+  function debounced(...args) {
+    const isFirstCall = timeoutId === null;
+
+    lastArgs = args;
+    lastContext = this;
+
+    // Run immediately on the first call when leading is true.
+    if (leading && isFirstCall) {
+      callbackFn.call(lastContext, ...lastArgs);
+    }
+
+    // A trailing call is needed:
+    // - always for trailing-only debounce
+    // - only after another call for leading + trailing debounce
+    if (trailing && (!leading || !isFirstCall)) {
+      hasPendingTrailingCall = true;
+    }
+
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      if (hasPendingTrailingCall) {
+        callbackFn.call(lastContext, ...lastArgs);
+      }
+
+      reset();
+    }, delay);
+  }
+
+  debounced.cancel = function () {
+    if (timeoutId === null) {
+      return false;
+    }
+
+    clearTimeout(timeoutId);
+    reset();
+
+    return true;
+  };
+
+  debounced.flush = function () {
+    if (timeoutId === null || !hasPendingTrailingCall) {
+      return false;
+    }
+
+    clearTimeout(timeoutId);
+
+    callbackFn.call(lastContext, ...lastArgs);
+
+    reset();
+
+    return true;
+  };
+
+  return debounced;
+}
+
 function callApi(event) {
   console.log(event.target.value);
 }
 
-const debounced = debounceLeadingTrailing(callApi, 500);
+const debounced = debounce(callApi, 5000);
 
 input.addEventListener("input", debounced);
 
