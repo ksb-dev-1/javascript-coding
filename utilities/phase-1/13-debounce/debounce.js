@@ -54,10 +54,18 @@ function debounce(callbackFn, delay = 1000, options = {}) {
 
 // ----------------------------------------------------------------
 
+/*
+
 function debounce(callbackFn, delay = 1000) {
   let timeoutId = null;
   let lastArgs = null;
   let lastContext = null;
+
+  function reset() {
+    timeoutId = null;
+    lastArgs = null;
+    lastContext = null;
+  }
 
   function debounced(...args) {
     clearTimeout(timeoutId);
@@ -67,50 +75,81 @@ function debounce(callbackFn, delay = 1000) {
 
     timeoutId = setTimeout(() => {
       callbackFn.call(lastContext, ...lastArgs);
-
-      timeoutId = null;
-      lastArgs = null;
-      lastContext = null;
+      reset();
     }, delay);
   }
 
   debounced.cancel = function () {
-    if (timeoutId === null) return;
+    if (timeoutId === null) {
+      return false;
+    }
 
     clearTimeout(timeoutId);
-    timeoutId = null;
-    lastArgs = null;
-    lastContext = null;
+    reset();
+
+    return true;
   };
 
   debounced.flush = function () {
-    if (timeoutId === null) return;
+    if (timeoutId === null) {
+      return false;
+    }
+
+    clearTimeout(timeoutId);
+    callbackFn.call(lastContext, ...lastArgs);
+    reset();
+
+    return true;
+  };
+  return debounced;
+}
+
+*/
+
+function debounceLeading(callbackFn, delay = 1000) {
+  let timeoutId = null;
+
+  return function (...args) {
+    const shouldRunNow = timeoutId === null;
 
     clearTimeout(timeoutId);
 
-    callbackFn.call(lastContext, ...lastArgs);
+    timeoutId = setTimeout(() => {
+      timeoutId = null;
+    }, delay);
 
-    timeoutId = null;
-    lastArgs = null;
-    lastContext = null;
+    if (shouldRunNow) {
+      callbackFn.call(this, ...args);
+    }
   };
-  return debounced;
 }
 
 function callApi(event) {
   console.log(event.target.value);
 }
 
-const debounced = debounce(callApi, 5000);
+const debounced = debounceLeading(callApi, 5000);
 
 input.addEventListener("input", debounced);
+
 cancelDebounce.addEventListener("click", () => {
-  debounced.cancel();
-  console.log("Debounce Cancelled");
+  const wasCancelled = debounced.cancel();
+
+  if (wasCancelled) {
+    console.log("Pending debounce cancelled");
+  } else {
+    console.log("Nothing was waiting to cancel");
+  }
 });
+
 flushDebounce.addEventListener("click", () => {
-  debounced.flush();
-  console.log("Debounce Flushed");
+  const wasFlushed = debounced.flush();
+
+  if (wasFlushed) {
+    console.log("Pending debounce ran immediately");
+  } else {
+    console.log("Nothing was waiting to flush");
+  }
 });
 
 // setTimeout(() => {
