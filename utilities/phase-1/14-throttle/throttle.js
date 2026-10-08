@@ -1,16 +1,22 @@
 const input = document.querySelector("#input");
 
-// function throttle(callbackFn, delay = 1000) {
-//   let lastCallTime = 0;
+/*
 
-//   return function (...args) {
-//     const now = Date.now();
-//     if (now - lastCallTime >= delay) {
-//       lastCallTime = now;
-//       callbackFn.apply(this, args);
-//     }
-//   };
-// }
+function throttle(callbackFn, delay = 1000) {
+  let lastCallTime = 0;
+
+  return function (...args) {
+    const now = Date.now();
+    if (now - lastCallTime >= delay) {
+      lastCallTime = now;
+      callbackFn.apply(this, args);
+    }
+  };
+}
+
+*/
+
+/*
 
 function throttle(callbackFn, delay = 1000) {
   let timerId = null;
@@ -35,6 +41,95 @@ function throttle(callbackFn, delay = 1000) {
       }, delay);
     }
   };
+}
+
+*/
+
+function throttle(callbackFn, delay, options = {}) {
+  const { leading = true, trailing = true } = options;
+
+  let timeoutId = null;
+  let lastArgs = null;
+  let lastContext = null;
+  let lastCallTime = 0;
+
+  function reset() {
+    timeoutId = null;
+    lastArgs = null;
+    lastContext = null;
+    lastCallTime = 0;
+  }
+
+  function invoke() {
+    callbackFn.call(lastContext, ...lastArgs);
+
+    lastArgs = null;
+    lastContext = null;
+  }
+
+  function throttled(...args) {
+    const now = Date.now();
+
+    lastArgs = args;
+    lastContext = this;
+
+    // First call
+    if (lastCallTime === 0) {
+      if (leading) {
+        lastCallTime = now;
+        invoke();
+      } else {
+        lastCallTime = now;
+      }
+    }
+
+    const remaining = delay - (now - lastCallTime);
+
+    // Throttle window has expired
+    if (remaining <= 0) {
+      if (leading || lastCallTime !== now) {
+        lastCallTime = now;
+        invoke();
+      }
+    }
+
+    // Schedule trailing call
+    else if (trailing && timeoutId === null) {
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+
+        if (lastArgs !== null) {
+          lastCallTime = Date.now();
+          invoke();
+        }
+      }, remaining);
+    }
+  }
+
+  throttled.cancel = function () {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+    }
+
+    reset();
+  };
+
+  throttled.flush = function () {
+    if (timeoutId === null) {
+      return;
+    }
+
+    clearTimeout(timeoutId);
+    timeoutId = null;
+
+    if (lastArgs !== null) {
+      lastCallTime = Date.now();
+      invoke();
+    }
+
+    reset();
+  };
+  return throttled;
 }
 
 // 1. Target function to execute
