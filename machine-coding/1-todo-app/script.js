@@ -1,5 +1,5 @@
 const todoAddInputForm = document.querySelector("#todo-input-form");
-const todoAddInput = document.querySelector("#todo-input");
+const todoAddInput = document.querySelector("#todo-add-input");
 const todoAddButton = document.querySelector("#todo-add-button");
 
 const searchInputForm = document.querySelector("#search-input-form");
@@ -14,6 +14,8 @@ const todoList = document.querySelector("#todo-list");
 
 const markAllDoneButton = document.querySelector("#mark-all-done-button");
 const clearAllButton = document.querySelector("#clear-all-button");
+
+const todoEmptyState = document.querySelector("#todo-empty-state");
 
 function getTodos() {
   const savedTodos = localStorage.getItem("todos");
@@ -51,16 +53,23 @@ searchInput.addEventListener("input", (e) => {
 });
 
 allButton.addEventListener("click", () => {
+  setActiveFilter(allButton);
   renderTodos();
 });
 
 todoButton.addEventListener("click", () => {
+  setActiveFilter(todoButton);
+
   const filteredTodos = todos.filter((todo) => todo.checked === false);
+
   renderTodos(filteredTodos);
 });
 
 completedButton.addEventListener("click", () => {
+  setActiveFilter(completedButton);
+
   const filteredTodos = todos.filter((todo) => todo.checked === true);
+
   renderTodos(filteredTodos);
 });
 
@@ -79,21 +88,39 @@ clearAllButton.addEventListener("click", () => {
   renderTodos();
 });
 
+function setActiveFilter(activeButton) {
+  const filterButtons = [allButton, todoButton, completedButton];
+
+  filterButtons.forEach((button) => {
+    button.classList.remove("todo-filters__button--active");
+  });
+
+  activeButton.classList.add("todo-filters__button--active");
+}
+
 function createTodo(todo) {
   const li = document.createElement("li");
   const checkInput = document.createElement("input");
   const title = document.createElement("span");
   const deleteButton = document.createElement("button");
 
+  li.classList.add("todo-list__item");
+
   checkInput.type = "checkbox";
   checkInput.checked = todo.checked;
+  checkInput.classList.add("todo-list__checkbox");
 
   title.textContent = todo.title;
-  title.style.textDecoration = todo.checked ? "line-through" : "none";
+  title.classList.add("todo-list__title");
+
+  if (todo.checked) {
+    title.style.textDecoration = "line-through";
+  }
 
   deleteButton.textContent = "Delete";
+  deleteButton.type = "button";
+  deleteButton.classList.add("todo-list__delete");
 
-  // Prevent direct checkbox click from bubbling up to the li click handler
   checkInput.addEventListener("click", (e) => {
     e.stopPropagation();
   });
@@ -102,13 +129,11 @@ function createTodo(todo) {
     toggleCheck(todo, checkInput.checked);
   });
 
-  // Prevent delete button click from triggering the li toggle
   deleteButton.addEventListener("click", (e) => {
     e.stopPropagation();
     deleteTodo(todo.id);
   });
 
-  // Toggle check/uncheck when clicking anywhere on the li
   li.addEventListener("click", () => {
     toggleCheck(todo, !todo.checked);
   });
@@ -146,17 +171,16 @@ function toggleCheck(todo, isChecked) {
 function renderTodos(todosToRender = todos) {
   todoList.innerHTML = "";
 
+  todoEmptyState.hidden = todosToRender.length > 0;
+
   todosToRender.forEach((todo) => {
     createTodo(todo);
   });
 
-  if (todosToRender.length > 0) {
-    markAllDoneButton.style.display = "block";
-    clearAllButton.style.display = "block"; // Show button
-  } else {
-    markAllDoneButton.style.display = "none";
-    clearAllButton.style.display = "none"; // Hide button
-  }
+  const hasTodos = todos.length > 0;
+
+  markAllDoneButton.hidden = !hasTodos;
+  clearAllButton.hidden = !hasTodos;
 }
 
 renderTodos();

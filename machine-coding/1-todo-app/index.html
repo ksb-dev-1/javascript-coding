@@ -3,42 +3,121 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <title>Todo App Practice</title>
+
+        <link rel="stylesheet" href="style.css" />
     </head>
+
     <body>
-        <main>
-            <section>
-                <form id="todo-input-form">
+        <main class="todo-app">
+            <section class="todo-app__container">
+                <header class="todo-app__header">
+                    <h1 class="todo-app__title">Todo App</h1>
+                    <p class="todo-app__subtitle">
+                        Keep track of what you need to get done.
+                    </p>
+                </header>
+
+                <!-- Add Todo -->
+                <form id="todo-input-form" class="todo-form todo-form--add">
                     <input
-                        id="todo-input"
+                        id="todo-add-input"
+                        class="todo-form__input"
                         type="text"
-                        placeholder="Enter todo you want to add"
+                        placeholder="What needs to be done?"
+                        autocomplete="off"
                     />
-                    <button id="todo-add-button">Add</button>
+
+                    <button
+                        id="todo-add-button"
+                        class="todo-form__button"
+                        type="submit"
+                    >
+                        Add
+                    </button>
                 </form>
-                <form id="search-input-form">
+
+                <!-- Search -->
+                <form
+                    id="search-input-form"
+                    class="todo-form todo-form--search"
+                >
                     <input
                         id="search-input"
-                        type="text"
-                        placeholder="Search todo"
-                        required
+                        class="todo-form__input"
+                        type="search"
+                        placeholder="Search todos..."
+                        autocomplete="off"
                     />
-                    <button id="search-todo-button">Search</button>
+
+                    <button
+                        id="search-todo-button"
+                        class="todo-form__button todo-form__button--secondary"
+                        type="submit"
+                    >
+                        Search
+                    </button>
                 </form>
-                <div>
-                    <button id="all-button">All</button>
-                    <button id="todo-button">Todo</button>
-                    <button id="completed-button">Completed</button>
+
+                <!-- Filters -->
+                <div class="todo-filters">
+                    <button
+                        id="all-button"
+                        class="todo-filters__button todo-filters__button--active"
+                        type="button"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        id="todo-button"
+                        class="todo-filters__button"
+                        type="button"
+                    >
+                        Todo
+                    </button>
+
+                    <button
+                        id="completed-button"
+                        class="todo-filters__button"
+                        type="button"
+                    >
+                        Completed
+                    </button>
                 </div>
-                <ul id="todo-list"></ul>
-                <button id="mark-all-done-button" style="display: none">
-                    Mark all done
-                </button>
-                <button id="clear-all-button" style="display: none">
-                    Clear All
-                </button>
+
+                <!-- Todo List -->
+                <ul id="todo-list" class="todo-list"></ul>
+
+                <!-- Empty State -->
+                <p id="todo-empty-state" class="todo-list__empty">
+                    No todos yet.
+                </p>
+
+                <!-- Actions -->
+                <div class="todo-actions">
+                    <button
+                        id="mark-all-done-button"
+                        class="todo-actions__button"
+                        type="button"
+                        hidden
+                    >
+                        Mark all done
+                    </button>
+
+                    <button
+                        id="clear-all-button"
+                        class="todo-actions__button todo-actions__button--danger"
+                        type="button"
+                        hidden
+                    >
+                        Clear all
+                    </button>
+                </div>
             </section>
         </main>
+
         <script src="script.js"></script>
     </body>
 </html>
