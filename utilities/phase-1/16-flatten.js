@@ -54,19 +54,19 @@ function flatten(nums) {
 
 */
 
-function flatten(nums, depth = 1) {
-  const stack = [];
-  for (let i = nums.length - 1; i >= 0; i--) {
-    stack.push([nums[i], depth]); // children start at FULL depth
-  }
+function flatten(nums, maxDepth = 1) {
+  const stack = [{ item: nums, depth: -1 }];
   const res = [];
 
   while (stack.length) {
-    const [item, d] = stack.pop();
+    const { item, depth } = stack.pop();
 
-    if (Array.isArray(item) && d > 0) {
+    if (Array.isArray(item) && depth < maxDepth) {
       for (let i = item.length - 1; i >= 0; i--) {
-        stack.push([item[i], d - 1]);
+        stack.push({
+          item: item[i],
+          depth: depth + 1,
+        });
       }
     } else {
       res.push(item);
