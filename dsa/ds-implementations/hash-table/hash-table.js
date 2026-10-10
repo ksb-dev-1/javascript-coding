@@ -74,7 +74,21 @@ class HashTable {
   }
 }
 
-const ht = new HashTable();
+const ht = new HashTable(6);
+ht.set("id-1", "User-1");
+ht.set("id-2", "User-2");
+ht.set("id-3", "User-3");
+ht.set("id-4", "User-4");
+ht.set("id-5", "User-5");
+ht.set("id-6", "User-6");
+
+ht.display();
+console.log(ht.get("id-2"));
+console.log(ht.has("id-4"));
+console.log(ht.remove("id-4"));
+ht.display();
+console.log(ht.get("id-4"));
+console.log(ht.has("id-4"));
 
 // console.log(ht.buckets);
 // console.log(ht.buckets.length);
