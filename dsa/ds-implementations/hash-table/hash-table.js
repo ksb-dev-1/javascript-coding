@@ -3,6 +3,7 @@ class HashTable {
     this.buckets = new Array(size);
     this.capacity = size;
     this.count = 0;
+    this.maxLoadFactor = 0.75;
 
     for (let i = 0; i < size; i++) {
       this.buckets[i] = [];
