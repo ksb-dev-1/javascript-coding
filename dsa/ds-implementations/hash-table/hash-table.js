@@ -66,6 +66,12 @@ class HashTable {
     }
     return false;
   }
+
+  display() {
+    for (let i = 0; i < this.buckets.length; i++) {
+      console.log(i, this.buckets[i]);
+    }
+  }
 }
 
 const ht = new HashTable();
