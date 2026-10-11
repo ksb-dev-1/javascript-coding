@@ -46,6 +46,21 @@ class LinkedList {
     this.count++;
   }
 
+  get(index) {
+    if (index < 0 || index >= this.count) {
+      return undefined;
+    }
+
+    let current = this.head;
+    let currentIndex = 0;
+
+    while (currentIndex < index) {
+      current = current.next;
+      currentIndex++;
+    }
+    return current.value;
+  }
+
   display() {
     let current = this.head;
 
