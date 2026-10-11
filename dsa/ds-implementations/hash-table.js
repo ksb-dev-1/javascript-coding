@@ -32,6 +32,34 @@ class HashTable {
     return total % this.capacity;
   }
 
+  // Double the capacity and redistribute existing entries.
+  resize() {
+    // Keep a reference to the old buckets.
+    const oldBuckets = this.buckets;
+
+    // Double the number of buckets.
+    this.capacity = this.capacity * 2;
+
+    // Create the new bucket array with independent empty arrays.
+    this.buckets = Array.from({ length: this.capacity }, () => []);
+
+    // Visit every bucket in the old array.
+    for (let i = 0; i < oldBuckets.length; i++) {
+      const bucket = oldBuckets[i];
+
+      // Visit every key-value pair in that bucket.
+      for (let j = 0; j < bucket.length; j++) {
+        const [key, value] = bucket[j];
+
+        // Recalculate the index using the new capacity.
+        const newIndex = this.hash(key);
+
+        // Place the existing pair into its new bucket.
+        this.buckets[newIndex].push([key, value]);
+      }
+    }
+  }
+
   // Return the number of unique key-value pairs.
   // O(1) because we maintain this.count.
   size() {
@@ -118,34 +146,49 @@ class HashTable {
     return false;
   }
 
-  // Double the capacity and redistribute existing entries.
-  resize() {
-    // Keep a reference to the old buckets.
-    const oldBuckets = this.buckets;
+  keys() {
+    const result = [];
 
-    // Double the number of buckets.
-    this.capacity = this.capacity * 2;
+    // Visit every bucket.
+    for (let i = 0; i < this.buckets.length; i++) {
+      const bucket = this.buckets[i];
 
-    // Create the new bucket array with independent empty arrays.
-    this.buckets = Array.from({ length: this.capacity }, () => []);
-
-    // Visit every bucket in the old array.
-    for (let i = 0; i < oldBuckets.length; i++) {
-      const bucket = oldBuckets[i];
-
-      // Visit every key-value pair in that bucket.
+      // Visit every entry inside this bucket.
       for (let j = 0; j < bucket.length; j++) {
-        const [key, value] = bucket[j];
-
-        // Recalculate the index using the new capacity.
-        const newIndex = this.hash(key);
-
-        // Place the existing pair into its new bucket.
-        this.buckets[newIndex].push([key, value]);
+        result.push(bucket[j][0]);
       }
     }
+    return result;
+  }
 
-    // Do not modify count: no entries were added or removed.
+  values() {
+    const result = [];
+
+    // Visit every bucket.
+    for (let i = 0; i < this.buckets.length; i++) {
+      const bucket = this.buckets[i];
+
+      // Visit every entry inside this bucket.
+      for (let j = 0; j < bucket.length; j++) {
+        result.push(bucket[j][1]);
+      }
+    }
+    return result;
+  }
+
+  entries() {
+    const result = [];
+
+    // Visit every bucket.
+    for (let i = 0; i < this.buckets.length; i++) {
+      const bucket = this.buckets[i];
+
+      // Visit every entry inside this bucket.
+      for (let j = 0; j < bucket.length; j++) {
+        result.push([bucket[j][0], bucket[j][1]]);
+      }
+    }
+    return result;
   }
 
   // Remove all entries while keeping the current capacity.
