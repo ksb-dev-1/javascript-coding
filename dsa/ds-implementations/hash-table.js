@@ -20,7 +20,7 @@ class HashTable {
   }
 
   // Convert a string key into a bucket index.
-  hash(key) {
+  _hash(key) {
     let total = 0;
 
     // Add the character codes of all characters in the key.
@@ -52,7 +52,7 @@ class HashTable {
         const [key, value] = bucket[j];
 
         // Recalculate the index using the new capacity.
-        const newIndex = this.hash(key);
+        const newIndex = this._hash(key);
 
         // Place the existing pair into its new bucket.
         this.buckets[newIndex].push([key, value]);
@@ -68,7 +68,7 @@ class HashTable {
 
   // Insert a new key-value pair or update an existing key.
   set(key, value) {
-    const index = this.hash(key);
+    const index = this._hash(key);
     const bucket = this.buckets[index];
 
     // Search the bucket for an existing key.
@@ -96,7 +96,7 @@ class HashTable {
   // Return the value associated with a key.
   // Return undefined if the key does not exist.
   get(key) {
-    const index = this.hash(key);
+    const index = this._hash(key);
     const bucket = this.buckets[index];
 
     // Search only the bucket where the key should be stored.
@@ -112,7 +112,7 @@ class HashTable {
   // Check whether a key exists.
   // Unlike get(), this returns a boolean.
   has(key) {
-    const index = this.hash(key);
+    const index = this._hash(key);
     const bucket = this.buckets[index];
 
     for (let i = 0; i < bucket.length; i++) {
@@ -127,7 +127,7 @@ class HashTable {
   // Remove a key-value pair.
   // Return true if removed, otherwise false.
   remove(key) {
-    const index = this.hash(key);
+    const index = this._hash(key);
     const bucket = this.buckets[index];
 
     for (let i = 0; i < bucket.length; i++) {
