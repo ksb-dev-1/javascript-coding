@@ -153,6 +153,33 @@ class LinkedList {
     return removedNode.value;
   }
 
+  pop() {
+    if (this.count === 0) {
+      return undefined;
+    }
+
+    if (this.count === 1) {
+      const removedNode = this.head;
+      this.head = null;
+      this.tail = null;
+      this.count--;
+      return removedNode.value;
+    }
+
+    let current = this.head;
+
+    while (current.next !== this.tail) {
+      current = current.next;
+    }
+
+    const removedNode = this.tail;
+    this.tail = current;
+    this.tail.next = null;
+
+    this.count--;
+    return removedNode.value;
+  }
+
   display() {
     let current = this.head;
 
