@@ -214,6 +214,20 @@ class LinkedList {
     return false;
   }
 
+  find(value) {
+    let current = this.head;
+    let index = 0;
+
+    while (current !== null) {
+      if (current.value === value) {
+        return index;
+      }
+      current = current.next;
+      index++;
+    }
+    return -1;
+  }
+
   display() {
     let current = this.head;
 
