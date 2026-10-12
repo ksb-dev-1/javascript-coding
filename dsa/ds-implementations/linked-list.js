@@ -245,6 +245,21 @@ class LinkedList {
     this.count = 0;
   }
 
+  reverse() {
+    let prev = null;
+    let current = this.head;
+
+    this.tail = this.head;
+
+    while (current !== null) {
+      let next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+    this.head = prev;
+  }
+
   display() {
     let current = this.head;
 
@@ -269,5 +284,8 @@ list.prepend(5);
 list.insert(1, 99);
 // list.display();
 
-list.remove(2);
+// list.remove(2);
+list.display();
+
+list.reverse();
 list.display();
