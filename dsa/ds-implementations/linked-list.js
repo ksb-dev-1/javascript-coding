@@ -228,6 +228,23 @@ class LinkedList {
     return -1;
   }
 
+  toArray() {
+    const result = [];
+    let current = this.head;
+
+    while (current !== null) {
+      result.push(current.value);
+      current = current.next;
+    }
+    return result;
+  }
+
+  clear() {
+    this.head = null;
+    this.tail = null;
+    this.count = 0;
+  }
+
   display() {
     let current = this.head;
 
