@@ -109,6 +109,50 @@ class LinkedList {
     return true;
   }
 
+  remove(index) {
+    if (index < 0 || index >= this.count) {
+      return undefined;
+    }
+
+    if (index === 0) {
+      const removedHead = this.head;
+      this.head = this.head.next;
+      this.count--;
+
+      if (this.count === 0) this.tail = null;
+
+      return removedHead.value;
+    }
+
+    if (index === this.count - 1) {
+      let current = this.head;
+
+      while (current.next !== this.tail) {
+        current = current.next;
+      }
+
+      const removeNode = this.tail;
+      this.tail = current;
+      this.tail.next = null;
+
+      this.count--;
+      return removeNode.value;
+    }
+
+    let current = this.head;
+    let currentIndex = 0;
+
+    while (currentIndex < index - 1) {
+      current = current.next;
+      currentIndex++;
+    }
+
+    const removedNode = current.next;
+    current.next = removedNode.next;
+    this.count--;
+    return removedNode.value;
+  }
+
   display() {
     let current = this.head;
 
@@ -131,4 +175,7 @@ list.prepend(5);
 // console.log(list.tail.value); // 20
 
 list.insert(1, 99);
+// list.display();
+
+list.remove(2);
 list.display();
