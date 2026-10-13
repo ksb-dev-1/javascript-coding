@@ -1,3 +1,5 @@
+// 142
+
 function detectCycle(head) {
   if (!head) return null;
 

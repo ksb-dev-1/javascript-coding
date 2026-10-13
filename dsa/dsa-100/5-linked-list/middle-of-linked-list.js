@@ -1,3 +1,5 @@
+// 876
+
 function middle(head) {
   let slow = head;
   let fast = head;
