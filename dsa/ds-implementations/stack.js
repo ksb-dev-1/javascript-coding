@@ -95,7 +95,6 @@ class Stack {
   peek() {
     // Time: O(1)
     // Space: O(1)
-
     if (this.isEmpty()) {
       return null;
     }
