@@ -362,6 +362,33 @@ class LinkedList {
     return slow?.value;
   }
 
+  removeNthFromEnd(n) {
+    // Create a dummy node.
+    const dummy = new Node(0);
+    dummy.next = this.head;
+
+    let fast = dummy;
+    let slow = dummy;
+
+    // Move fast n nodes ahead.
+    for (let i = 0; i < n; i++) {
+      fast = fast.next;
+    }
+
+    // Move both pointers until fast reaches the last node.
+    while (fast.next !== null) {
+      fast = fast.next;
+      slow = slow.next;
+    }
+
+    // Remove the target node.
+    slow.next = slow.next.next;
+
+    this.head = dummy.next;
+
+    return this.head;
+  }
+
   // Time: O(n), excluding the cost of console rendering
   // Auxiliary space: O(1) for the method's own variables,
   // excluding console implementation and output buffering.
@@ -375,3 +402,18 @@ class LinkedList {
     }
   }
 }
+
+const list = new LinkedList(5);
+list.append(10);
+list.append(20);
+list.append(30);
+list.append(40);
+list.append(50);
+
+list.display();
+
+list.removeNthFromEnd(2);
+
+console.log("------------------------------");
+
+list.display();
