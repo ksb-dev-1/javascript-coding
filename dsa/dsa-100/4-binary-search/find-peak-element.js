@@ -13,7 +13,6 @@ function findPeak(nums) {
       right = mid;
     }
   }
-
   return left;
 }
 
