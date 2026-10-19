@@ -64,7 +64,6 @@ Function.prototype.myApply = function (context, args) {
     for (let i = 0; i < length; i++) {
       finalArgs.push(args[i]);
     }
-
     return context[fnKey](...finalArgs);
   } finally {
     delete context[fnKey];

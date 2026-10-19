@@ -32,11 +32,19 @@ Array.prototype.mySlice = function (start, end) {
 
   const length = this.length;
 
-  if (start === undefined) start = 0;
-  if (end === undefined) end = length;
+  if (start === undefined) {
+    start = 0;
+  }
+  if (end === undefined) {
+    end = length;
+  }
 
-  if (start < 0) start = length + start;
-  if (end < 0) end = length + end;
+  if (start < 0) {
+    start = length + start;
+  }
+  if (end < 0) {
+    end = length + end;
+  }
 
   start = Math.max(0, Math.min(start, length));
   end = Math.max(0, Math.min(end, length));
