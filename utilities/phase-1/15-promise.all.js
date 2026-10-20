@@ -27,3 +27,9 @@ function promiseAll(promises) {
     });
   });
 }
+
+promiseAll([
+  new Promise((resolve) => setTimeout(() => resolve("A"), 1000)),
+  new Promise((resolve) => setTimeout(() => reject("B"), 400)),
+  new Promise((resolve) => setTimeout(() => resolve("C"), 500)),
+]).then(console.log);
