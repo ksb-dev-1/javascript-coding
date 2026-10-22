@@ -34,6 +34,7 @@ function compactObject(obj) {
 // const obj = { a: null, b: [false, 1] };
 // const obj = [null, 0, 5, [0], [false, 16]];
 
-const obj = [1, [2, 0], { a: 2, b: 0 }];
+const obj = [1, [2, 0], { a: 2, b: [null, 4, { c: 5 }] }];
 
 console.log(compactObject(obj));
+console.log(JSON.stringify(compactObject(obj), null, 2));
