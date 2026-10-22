@@ -7,7 +7,6 @@ Array.prototype.groupBy = function (fn) {
     if (!Object.hasOwn(obj, key)) {
       obj[key] = [];
     }
-
     obj[key].push(this[i]);
   }
   return obj;
