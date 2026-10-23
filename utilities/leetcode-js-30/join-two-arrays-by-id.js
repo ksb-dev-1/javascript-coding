@@ -16,7 +16,8 @@ function join(arr1, arr2) {
       map.set(obj.id, obj);
     }
   }
-  return Array.from(map.values()).sort((a, b) => a.id - b.id);
+  // return Array.from(map.values()).sort((a, b) => a.id - b.id);
+  return [...map.values()].sort((a, b) => a.id - b.id);
 }
 
 // const arr1 = [
