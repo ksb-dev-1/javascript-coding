@@ -5,7 +5,8 @@ function once(fn) {
   return function (...args) {
     if (!called) {
       called = true;
-      result = fn.apply(this, args);
+      return fn.apply(this, args);
+      // result = fn.apply(this, args);
     }
     return result;
   };
