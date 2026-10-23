@@ -35,7 +35,32 @@ function join(arr1, arr2) {
 //   { id: 3, x: 0, y: 0 },
 // ];
 
-const arr1 = [{ id: 1, b: { b: 94 }, v: [4, 3], y: 48 }];
-const arr2 = [{ id: 1, b: { c: 84 }, v: [1, 3] }];
+const arr1 = [
+  {
+    id: 1,
+    b: { b: 94 },
+    v: [4, 3],
+    y: 48,
+  },
+];
+const arr2 = [
+  {
+    id: 1,
+    b: { c: 84 },
+    v: [1, 3],
+  },
+];
 
 console.log(join(arr1, arr2));
+
+/*
+
+Object.assign(target, source1, source2);
+
+- target: The object that receives the properties.
+- source1: The first object to copy properties from.
+- source2: The second object to copy properties from.
+
+Properties are copied from left to right. If two objects have the same property, the later object's value wins.
+
+*/
