@@ -121,6 +121,25 @@ function memoize(fn) {
 
 */
 
+/*
+
+function memoize(fn) {
+    const cache = {};
+
+    return function(...args) {
+        const key = JSON.stringify(args);
+
+        if(Object.hasOwn(cache, key)) {
+            return cache[key];
+        }
+        const res = fn.apply(this, args);
+        cache[key] = res;
+        return res;
+    }
+}
+
+*/
+
 function memoize(fn) {
   const cache = new Map();
 
