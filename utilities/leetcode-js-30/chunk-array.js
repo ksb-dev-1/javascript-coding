@@ -1,26 +1,19 @@
-/*
-
 function chunk(arr, size) {
   const res = [];
-  let count = 0;
+  let currChunk = [];
 
-  for (let i = 0; i < arr.length; i += size) {
-    const chunk = [];
+  for (let i = 0; i < arr.length; i++) {
+    currChunk.push(arr[i]);
 
-    for (let j = 0; j < size; j++) {
-      if (count < arr.length) {
-        chunk.push(arr[count]);
-        count++;
-      } else {
-        break;
-      }
+    if (currChunk.length === size || i === arr.length - 1) {
+      res.push(currChunk);
+      currChunk = [];
     }
-    res.push(chunk);
   }
   return res;
 }
 
-*/
+/*
 
 function chunk(arr, size) {
   const chunked = [];
@@ -30,6 +23,8 @@ function chunk(arr, size) {
   }
   return chunked;
 }
+
+*/
 
 const arr = [1, 2, 3, 4, 5],
   size = 1;
