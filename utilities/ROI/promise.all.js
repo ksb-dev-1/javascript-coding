@@ -43,3 +43,10 @@ promiseAll([
 // ])
 //   .then(console.log)
 //   .catch(console.log);
+
+// const functions = [
+//     () => new Promise(resolve => setTimeout(() => resolve(1), 200)),
+//     () => new Promise((resolve, reject) => setTimeout(() => reject("Error"), 100))
+// ]
+//
+// if input is like array of functions then use Promise.resolve(promise())
