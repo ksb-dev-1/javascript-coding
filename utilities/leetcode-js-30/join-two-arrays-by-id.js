@@ -16,6 +16,9 @@ function join(arr1, arr2) {
       map.set(obj.id, obj);
     }
   }
+
+  console.log(map);
+  console.log([...map.values()]);
   // return Array.from(map.values()).sort((a, b) => a.id - b.id);
   return [...map.values()].sort((a, b) => a.id - b.id);
 }
@@ -35,21 +38,27 @@ function join(arr1, arr2) {
 //   { id: 3, x: 0, y: 0 },
 // ];
 
+// const arr1 = [
+//   {
+//     id: 1,
+//     b: { b: 94 },
+//     v: [4, 3],
+//     y: 48,
+//   },
+// ];
+// const arr2 = [
+//   {
+//     id: 1,
+//     b: { c: 84 },
+//     v: [1, 3],
+//   },
+// ];
+
 const arr1 = [
-  {
-    id: 1,
-    b: { b: 94 },
-    v: [4, 3],
-    y: 48,
-  },
+  { id: 1, x: 36, d: 26, f: 35 },
+  { id: 3, c: 20, z: 75 },
 ];
-const arr2 = [
-  {
-    id: 1,
-    b: { c: 84 },
-    v: [1, 3],
-  },
-];
+const arr2 = [{ id: 2, o: 48, z: 84, y: 61 }];
 
 console.log(join(arr1, arr2));
 
