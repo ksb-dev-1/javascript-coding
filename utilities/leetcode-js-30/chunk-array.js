@@ -1,14 +1,17 @@
 function chunk(arr, size) {
   const res = [];
-  let currChunk = [];
+  let chunk = [];
 
   for (let i = 0; i < arr.length; i++) {
-    currChunk.push(arr[i]);
+    chunk.push(arr[i]);
 
-    if (currChunk.length === size || i === arr.length - 1) {
-      res.push(currChunk);
-      currChunk = [];
+    if (chunk.length === size) {
+      res.push(chunk);
+      chunk = [];
     }
+  }
+  if (chunk.length > 0) {
+    res.push(chunk);
   }
   return res;
 }
