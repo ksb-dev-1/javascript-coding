@@ -1,14 +1,16 @@
 // 206
 
 function reverse(head) {
-  if (!head) return;
+  let prev = null;
+  let current = head;
 
-  let slow = head;
-  let fast = head;
+  while (current !== null) {
+    const temp = current.next;
 
-  if (fast !== null && fast.next !== null) {
-    slow = fast.next;
-    fast = fast.next.next;
+    current.next = prev;
+
+    prev = current;
+    current = temp;
   }
-  return slow;
+  return prev;
 }
