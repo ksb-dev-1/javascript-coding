@@ -44,8 +44,10 @@ function merge(intervals) {
     }
 
     const lastInterval = res[res.length - 1];
+    console.log(lastInterval);
 
     if (intervals[i][0] <= lastInterval[1]) {
+      console.log(true);
       lastInterval[1] = Math.max(lastInterval[1], intervals[i][1]);
     } else {
       res.push(intervals[i]);
@@ -54,11 +56,18 @@ function merge(intervals) {
   return res;
 }
 
+// const intervals = [
+//   [1, 3],
+//   [8, 10],
+//   [2, 6],
+//   [15, 18],
+// ];
+
 const intervals = [
-  [1, 3],
-  [8, 10],
-  [2, 6],
-  [15, 18],
+  [1, 5],
+  [2, 4],
+  [4, 6],
+  [7, 8],
 ];
 
 console.log(merge(intervals));
