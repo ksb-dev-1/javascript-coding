@@ -41,35 +41,49 @@ const root = new TreeNode(
 
 function preorder(node, out = []) {
   if (!node) return out;
+
   out.push(node.val);
+
   preorder(node.left, out);
   preorder(node.right, out);
+
   return out;
 }
 
 function inorder(node, out = []) {
   if (!node) return out;
+
   inorder(node.left, out);
+
   out.push(node.val);
+
   inorder(node.right, out);
+
   return out;
 }
 
 function postorder(node, out = []) {
   if (!node) return out;
+
   postorder(node.left, out);
   postorder(node.right, out);
+
   out.push(node.val);
+
   return out;
 }
 
 function preorderIter(root) {
   const out = [];
   const stack = [root];
+
   while (stack.length) {
     const node = stack.pop();
+
     if (!node) continue;
+
     out.push(node.val);
+
     if (node.right) stack.push(node.right);
     if (node.left) stack.push(node.left);
   }
@@ -80,6 +94,7 @@ function inorderIter(root) {
   const out = [];
   const stack = [];
   let node = root;
+
   while (stack.length || node) {
     while (node) {
       stack.push(node);
@@ -95,10 +110,14 @@ function inorderIter(root) {
 function postorderIter(root) {
   const out = [];
   const stack = [root];
+
   while (stack.length) {
     const node = stack.pop();
+
     if (!node) continue;
+
     out.push(node.val);
+
     if (node.left) stack.push(node.left);
     if (node.right) stack.push(node.right);
   }
