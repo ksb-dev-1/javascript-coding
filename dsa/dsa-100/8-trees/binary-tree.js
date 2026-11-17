@@ -124,16 +124,44 @@ function postorderIter(root) {
   return out.reverse();
 }
 
+function dfs(root) {
+  if (!root) return [];
+
+  const stack = [];
+  const res = [];
+
+  stack.push(root);
+
+  while (stack.length > 0) {
+    const current = stack.pop();
+
+    res.push(current.val);
+
+    if (current.right) {
+      stack.push(current.right);
+    }
+
+    if (current.left) {
+      stack.push(current.left);
+    }
+  }
+  return res;
+}
+
+console.log(dfs(root));
+
+function bfs(root) {}
+
 //        1
 //       / \
 //      2   3
 //     / \   \
 //    4   5   6
 
-console.log(preorder(root));
-console.log(inorder(root));
-console.log(postorder(root));
+// console.log(preorder(root));
+// console.log(inorder(root));
+// console.log(postorder(root));
 
-console.log(preorderIter(root));
-console.log(inorderIter(root));
-console.log(postorderIter(root));
+// console.log(preorderIter(root));
+// console.log(inorderIter(root));
+// console.log(postorderIter(root));
