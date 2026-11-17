@@ -134,23 +134,50 @@ function dfs(root) {
 
   while (stack.length > 0) {
     const current = stack.pop();
+    // console.log(current.val);
 
     res.push(current.val);
 
     if (current.right) {
+      // console.log("right : ", current.right);
       stack.push(current.right);
     }
 
     if (current.left) {
+      // console.log("left : ", current.left);
       stack.push(current.left);
     }
   }
   return res;
 }
 
-console.log(dfs(root));
+// console.log(dfs(root));
 
-function bfs(root) {}
+function bfs(root) {
+  if (!root) return [];
+
+  const queue = [];
+  const res = [];
+
+  queue.push(root);
+
+  while (queue.length > 0) {
+    const current = queue.shift();
+
+    res.push(current.val);
+
+    if (current.left) {
+      queue.push(current.left);
+    }
+
+    if (current.right) {
+      queue.push(current.right);
+    }
+  }
+  return res;
+}
+
+console.log(bfs(root));
 
 //        1
 //       / \
@@ -165,3 +192,31 @@ function bfs(root) {}
 // console.log(preorderIter(root));
 // console.log(inorderIter(root));
 // console.log(postorderIter(root));
+
+function binaryTreeLevelOrderTraversal(root) {
+  if (!root) return [];
+
+  const queue = [root];
+  const res = [];
+
+  while (queue.length > 0) {
+    const levelSize = queue.length;
+    const level = [];
+
+    for (let i = 0; i < levelSize; i++) {
+      const current = queue.shift();
+
+      level.push(current.val);
+
+      if (current.left) {
+        queue.push(current.left);
+      }
+
+      if (current.right) {
+        queue.push(current.right);
+      }
+    }
+    res.push(level);
+  }
+  return res;
+}
