@@ -21,11 +21,25 @@ c.right = f;
 
 console.log(a);
 
-// a
-// / \
-// b   c
-// / \   \
-// d   e   f
+/* ===== Before flipping
+
+a
+/ \
+b   c
+/ \   \
+d   e   f
+
+===== */
+
+/* ===== After Flipping
+
+a
+/ \
+c   b
+/   / \
+f   e   d
+
+===== */
 
 function binaryTreeFlip(root) {
   if (!root) return null;
